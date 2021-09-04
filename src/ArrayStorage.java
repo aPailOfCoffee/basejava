@@ -3,18 +3,24 @@ public class ArrayStorage {
   private Resume[] storage = new Resume[10000];
   private int size;
 
-  public void clear() { //done
+  /** Null all Resumes in the storage */
+  public void clear() {
     for (int i = 0; i < size; i++) {
       storage[i] = null;
     }
     size = 0;
   }
 
-  public void save(Resume r) { //done
+  /** @param r - Resume that will be added to the storage */
+  public void save(Resume r) {
     storage[size++] = r;
   }
 
-  public Resume get(String uuid) {//done
+  /**
+   * @param uuid of the searched Resume.
+   * @return Resume with specified uuid
+   */
+  public Resume get(String uuid) {
     for (int i = 0; i < size; i++) {
       if (storage[i].getUuid().equals(uuid)) {
         return storage[i];
@@ -23,6 +29,12 @@ public class ArrayStorage {
     return null;
   }
 
+  /**
+   * Shifts all Resumes to the left, into the place of the deleted one.
+   * If deleted Resume is last - just null it.
+   * size - i + 1 - count of Resumes that contains after deleted one
+   * @param uuid Resume that should be deleted
+   */
   public void delete(String uuid) {
     for (int i = 0; i < size; i++) {
       if (storage[i].getUuid().equals(uuid)) {
@@ -38,13 +50,14 @@ public class ArrayStorage {
   }
 
   /** @return array, contains only Resumes in storage (without null) */
-  public Resume[] getAll() { //done
+  public Resume[] getAll() {
     Resume[] all = new Resume[size];
     System.arraycopy(storage, 0, all, 0, size);
     return all;
   }
 
-  public int size() {//done
+  /** @return count of not-null Resumes contained in the storage */
+  public int size() {
     return size;
   }
 }
